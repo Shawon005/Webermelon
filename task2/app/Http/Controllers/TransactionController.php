@@ -40,7 +40,7 @@ class TransactionController extends Controller
             'funds'=>$request->funds,
             'losses'=>$request->losses,
             'profits'=>$request->profits,
-            'date'=>date('m-Y', strtotime(now())),
+            'date'=>date(now()),
 
         ]);
         return redirect()->route('transaction.index')->with('message' , 'Store was successful!');
@@ -51,7 +51,57 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        $trans=DB::table('transactions')->where('date',$id)->get();
+        if($id=='jan'){
+            $formdata='2024/01/01';
+            $todata='2024/01/31';
+        }
+        else if($id=='fab'){
+            $formdata='2024/02/01';
+            $todata='2024/02/28';
+        }
+        else if($id=='mar'){
+            $formdata='2024/03/01';
+            $todata='2024/03/31';
+        }
+        else if($id=='apr'){
+            $formdata='2024/04/01';
+            $todata='2024/04/30';
+        }
+        else if($id=='may'){
+            $formdata='2024/05/01';
+            $todata='2024/05/31';
+        }
+        else if($id=='jun'){
+            $formdata='2024/06/01';
+            $todata='2024/06/30';
+        }
+        else if($id=='juy'){
+            $formdata='2024/07/01';
+            $todata='2024/07/31';
+        }
+        else if($id=='aug'){
+            $formdata='2024/08/01';
+            $todata='2024/08/31';
+        }
+        else if($id=='sep'){
+            $formdata='2024/09/01';
+            $todata='2024/09/30';
+            // dd($formdata);
+        }
+        else if($id=='oct'){
+            $formdata='2024/10/01';
+            $todata='2024/10/31';
+        }
+        else if($id=='nov'){
+            $formdata='2024/11/01';
+            $todata='2024/11/30';
+        }
+        else if($id=='dec'){
+            $formdata='2024/12/01';
+            $todata='2024/12/31';
+        }
+        $trans=DB::table('transactions')->whereBetween('date',[$formdata,$todata])->get();
+
         return view('show',compact('trans'));
         // date('d-m-Y', strtotime($user->from_date));
     }
