@@ -1,0 +1,8 @@
+.center {
+    margin: auto;
+    width: 500px;
+}
+.card-body .a_tex{
+    text-decoration: none !important;
+    color: black !important;
+}
